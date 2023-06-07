@@ -1,7 +1,9 @@
 package StellarBurgersPOM;
-import StellarBurgersAPI.BaseRestClient;
 
-import org.openqa.selenium.*;
+import StellarBurgersAPI.BaseRestClient;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,7 +12,6 @@ import java.time.Duration;
 
 public class MainPage {
     private WebDriver driver;
-
 
 
     // Хэдер
@@ -43,49 +44,50 @@ public class MainPage {
         elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
-    //Метод проверки отображения элементов хедера
+    @Step("Проверка отображения хэдера страницы")
     public boolean isHeaderBlockDisplayed() {
         elementVisibilityWait(headerBlock);
         return driver.findElement(headerBlock).isDisplayed();
     }
 
+    @Step("Проверка отображения кнопки Личный кабинет в хэдере")
     public boolean isAccountLinkDisplayed() {
         elementVisibilityWait(accountLink);
         return driver.findElement(accountLink).isDisplayed();
     }
 
-    //Метод проверки отображения блока конструктора
+    @Step("Проверка отображения конструктора Соберите бургер")
     public boolean isConstructorBlockDisplayed() {
         elementVisibilityWait(constructorBlock);
         return driver.findElement(constructorBlock).isDisplayed();
     }
 
-    //Метод проверки активной вкладки "Булки"
-    public boolean isBunTabActive(){
+    @Step("Проверка отображения активной вкладки Булки")
+    public boolean isBunTabActive() {
         elementVisibilityWait(bunTabActiveLink);
         return driver.findElement(bunTabActiveLink).isDisplayed();
     }
 
 
-    //Переход к табу "Соусы"
-    public void openSauceTab () {
+    @Step("Клик по табу Соусы")
+    public void openSauceTab() {
         driver.findElement(sauceTabLink).click();
     }
 
-    //Метод проверки активной вкладки "Соусы"
-    public boolean isSauceTabActive(){
+    @Step("Проверка отображения активной вкладки Соусы")
+    public boolean isSauceTabActive() {
         elementVisibilityWait(sauceTabActiveLink);
         return driver.findElement(sauceTabActiveLink).isDisplayed();
     }
 
 
-    //Переход к табу "Начинки"
-    public void openFillingTab () {
+    @Step("Клик по табу Начинки")
+    public void openFillingTab() {
         driver.findElement(fillingTabLink).click();
     }
 
-    //Метод проверки активной вкладки "Начинки"
-    public boolean isFillingTabActive(){
+    @Step("Проверка отображения активной вкладки Начинки")
+    public boolean isFillingTabActive() {
         elementVisibilityWait(fillingTabActiveLink);
         return driver.findElement(fillingTabActiveLink).isDisplayed();
     }

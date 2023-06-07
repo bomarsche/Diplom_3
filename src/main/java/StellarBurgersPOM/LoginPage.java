@@ -1,6 +1,7 @@
 package StellarBurgersPOM;
 
 import StellarBurgersAPI.BaseRestClient;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,7 +37,6 @@ public class LoginPage {
     private By regSignInButton = By.xpath(".//a[text()='Войти']");
 
 
-
     public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -53,80 +53,88 @@ public class LoginPage {
         elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
-    //Метод проверки отображения элементов хедера
+    @Step("Проверка отображения хэдера страницы")
     public boolean isHeaderBlockDisplayed() {
         elementVisibilityWait(headerBlock);
         return driver.findElement(headerBlock).isDisplayed();
     }
 
+    @Step("Проверка отображения кнопки Личный кабинет в хэдере")
     public boolean isAccountLinkDisplayed() {
         elementVisibilityWait(accountLink);
         return driver.findElement(accountLink).isDisplayed();
     }
 
     //Методы перехода к форме логина
+    @Step("Клик по кнопке Личный кабинет в хэдере (без авторизации)")
     public void openLoginFormFromAccountLink() {
         driver.findElement(accountLink).click();
     }
 
+    @Step("Клик по кнопке Войти в аккаунт (без авторизации)")
     public void openLoginFormFromEnterLink() {
         driver.findElement(signInButton).click();
     }
 
-    //Метод проверки отображения формы логина
+    @Step("Проверка отображения формы логина")
     public boolean isLoginFormDisplayed() {
         elementVisibilityWait(loginForm);
         return driver.findElement(loginForm).isDisplayed();
     }
 
     //Методы заполнения формы
-    public void setEmail(String email){
+    public void setEmail(String email) {
         driver.findElement(loginFormEmailField).sendKeys(email);
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         driver.findElement(loginFormPasswordField).sendKeys(password);
     }
 
-    public void submitLoginForm(){
+    public void submitLoginForm() {
         driver.findElement(loginFormSubmit).click();
     }
 
+    @Step("Заполнение формы логина")
     public void completeLogin(String email, String password) {
         setEmail(email);
         setPassword(password);
         submitLoginForm();
     }
 
-    //Вход через регистрацию
+    @Step("Переход по урлу регистрации")
     public void openRegUrl() {
         driver.get(BaseRestClient.REG_URL);
     }
 
+    @Step("Проверка отображения кнопки Войти на странице регистрации")
     public boolean isRegLoginLinkDisplayed() {
         elementVisibilityWait(regSignInButton);
         return driver.findElement(regSignInButton).isDisplayed();
     }
 
-    public void openLoginForm(){
+    @Step("Проверка отображения формы логина")
+    public void openLoginForm() {
         driver.findElement(regSignInButton).click();
     }
 
-    //Вход через восстановление пароля
-    public void openForgotPassForm () {
+    @Step("Клик по кнопке Восстановить пароль")
+    public void openForgotPassForm() {
         driver.findElement(loginFormForgotPassLink).click();
     }
 
+    @Step("Проверка отображения кнопки Войти на странице восстановления пароля")
     public boolean isForgotPassLoginLinkDisplayed() {
         elementVisibilityWait(forgotPassFormSignInLink);
         return driver.findElement(forgotPassFormSignInLink).isDisplayed();
     }
 
+    @Step("Клик по кнопке Войти на странице восстановления пароля")
     public void returnToLoginForm() {
         driver.findElement(forgotPassFormSignInLink).click();
     }
 
-    //Проверка отображения кнопки Оформить заказ
+    @Step("Проверка отображения кнопки Оформить заказ")
     public boolean isOrderButtonEnabled() {
         elementVisibilityWait(orderButton);
         return driver.findElement(orderButton).isDisplayed();

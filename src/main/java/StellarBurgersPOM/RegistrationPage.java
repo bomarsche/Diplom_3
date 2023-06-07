@@ -1,7 +1,9 @@
 package StellarBurgersPOM;
-import StellarBurgersAPI.BaseRestClient;
 
-import org.openqa.selenium.*;
+import StellarBurgersAPI.BaseRestClient;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,12 +29,11 @@ public class RegistrationPage {
     private By loginForm = By.xpath(".//div[@class = 'Auth_login__3hAey']/h2[text() = 'Вход']");
 
 
-
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    //Метод перехода по урлу
+    @Step("Переход по урлу регистрации")
     public void openURL() {
         driver.get(BaseRestClient.REG_URL);
     }
@@ -43,35 +44,36 @@ public class RegistrationPage {
         elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
-    //Метод проверки отображения элементов хедера
+    @Step("Проверка отображения хэдера страницы")
     public boolean isHeaderBlockDisplayed() {
         elementVisibilityWait(headerBlock);
         return driver.findElement(headerBlock).isDisplayed();
     }
 
-    //Метод проверки отображения формы регистрации
+    @Step("Проверка отображения формы регистрации")
     public boolean isRegFormDisplayed() {
         elementVisibilityWait(regForm);
         return driver.findElement(regForm).isDisplayed();
     }
 
     //Методы заполнения формы
-    public void setName(String name){
+    public void setName(String name) {
         driver.findElement(regFormNameField).sendKeys(name);
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         driver.findElement(regFormEmailField).sendKeys(email);
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         driver.findElement(regFormPasswordField).sendKeys(password);
     }
 
-    public void submitRegForm(){
+    public void submitRegForm() {
         driver.findElement(regFormSubmit).click();
     }
 
+    @Step("Заполнение формы регистрации")
     public void completeRegistration(String name, String email, String password) {
         setName(name);
         setEmail(email);
@@ -79,18 +81,20 @@ public class RegistrationPage {
         submitRegForm();
     }
 
+    @Step("Проверка отображения формы логина после успешной регистрации")
     public boolean checkAfterRegister() {
         elementVisibilityWait(loginForm);
         return driver.findElement(loginForm).isDisplayed();
 
     }
 
-    // Ошибки валидации
+    @Step("Проверка отображения ошибки некорректный пароль")
     public boolean getPasswordValidationAlert() {
         elementVisibilityWait(alertIncorrectPass);
         return driver.findElement(alertIncorrectPass).isDisplayed();
     }
 
+    @Step("Проверка отображения ошибки что пользователь уже существует")
     public boolean getAlreadyExistsAlert() {
         elementVisibilityWait(alertUserAlreadyExists);
         return driver.findElement(alertUserAlreadyExists).isDisplayed();

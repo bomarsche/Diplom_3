@@ -18,12 +18,12 @@ public class BaseRestClient {
     public static final String USER_PATH = "auth/user";
 
 
-
     public RequestSpecification getReqSpec() {
         return new RequestSpecBuilder()
                 .setBaseUri(API_PATH)
                 .setContentType(ContentType.JSON)
-                .build();
+                .build()
+                .log().all();
     }
 
     public RequestSpecification getReqSpecAuth(String accessToken) {
@@ -31,6 +31,7 @@ public class BaseRestClient {
                 .setBaseUri(API_PATH)
                 .setContentType(ContentType.JSON)
                 .addHeader("authorization", accessToken)
-                .build();
+                .build()
+                .log().all();
     }
 }

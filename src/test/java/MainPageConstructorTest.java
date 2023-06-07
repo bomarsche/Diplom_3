@@ -1,38 +1,11 @@
-import StellarBurgersPOM.*;
-
+import StellarBurgersPOM.MainPage;
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class MainPageConstructorTest {
-
-    private WebDriver driver;
+public class MainPageConstructorTest extends BaseTest {
     private MainPage objMainPage;
-
-    @Before
-    public void setUp(){
-        //Проверяем соответствие версий вебдрайвера и браузера в системе
-        WebDriverManager.chromedriver().setup();
-
-
-        // Chromedriver init
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--remote-allow-origins=*", "--disable-extensions", "start-maximized");
-        driver = new ChromeDriver(options);
-
-        // Yandexdriver init
-        /*ChromeOptions options = new ChromeOptions();
-        System.setProperty("webdriver.chrome.driver", "D:\\projects\\praktikum\\yandexdriver\\yandexdriver.exe");
-        options.setBinary("C:\\Users\\bomar\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);*/
-    }
 
     @Before
     public void startUpPage() {
@@ -69,11 +42,6 @@ public class MainPageConstructorTest {
         objMainPage.isBunTabActive();
         objMainPage.openFillingTab();
         objMainPage.isFillingTabActive();
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 
 }

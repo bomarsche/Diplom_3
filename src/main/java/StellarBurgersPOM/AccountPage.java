@@ -1,15 +1,13 @@
 package StellarBurgersPOM;
 
 import StellarBurgersAPI.BaseRestClient;
-
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-import static StellarBurgersAPI.BaseRestClient.BASE_URL;
 
 public class AccountPage {
 
@@ -53,81 +51,86 @@ public class AccountPage {
         elementWait.until(ExpectedConditions.visibilityOfElementLocated(waitElement));
     }
 
-    //Метод проверки отображения элементов хедера
+    @Step("Проверка отображения хэдера страницы")
     public boolean isHeaderBlockDisplayed() {
         elementVisibilityWait(headerBlock);
         return driver.findElement(headerBlock).isDisplayed();
     }
 
+    @Step("Проверка отображения кнопки Личный кабинет в хэдере")
     public boolean isAccountLinkDisplayed() {
         elementVisibilityWait(accountLink);
         return driver.findElement(accountLink).isDisplayed();
     }
 
-    //Методы перехода к форме логина
+    @Step("Клик по кнопке Личный кабинет в хэдере (без авторизации)")
     public void openLoginFormFromAccountLink() {
         driver.findElement(accountLink).click();
     }
 
-    //Метод проверки отображения формы логина
+    @Step("Проверка отображения формы регистрации")
     public boolean isLoginFormDisplayed() {
         elementVisibilityWait(loginForm);
         return driver.findElement(loginForm).isDisplayed();
     }
 
     //Методы заполнения формы
-    public void setEmail(String email){
+    public void setEmail(String email) {
         driver.findElement(loginFormEmailField).sendKeys(email);
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         driver.findElement(loginFormPasswordField).sendKeys(password);
     }
 
-    public void submitLoginForm(){
+    public void submitLoginForm() {
         driver.findElement(loginFormSubmit).click();
     }
 
+    @Step("Заполнение формы регистрации")
     public void completeLogin(String email, String password) {
         setEmail(email);
         setPassword(password);
         submitLoginForm();
     }
 
-    //Проверка отображения кнопки Оформить заказ
+
+    @Step("Проверка отображения кнопки Оформить заказ")
     public boolean isOrderButtonEnabled() {
         elementVisibilityWait(orderButton);
         return driver.findElement(orderButton).isDisplayed();
     }
 
+    @Step("Клик по кнопке Личный кабинет в хэдере (после авторизации)")
     public void openAccountPage() {
         driver.findElement(accountLink).click();
     }
 
-    //Личный кабинет
+    @Step("Проверка отображения раздела Личный кабинет")
     public boolean isAccountNavDisplayed() {
         elementVisibilityWait(accountNavBlock);
         return driver.findElement(accountNavBlock).isDisplayed();
     }
 
+    @Step("Клик по кнопке Выход в Личном кабинете")
+    public void logout() {
+        driver.findElement(logoutButton).click();
+    }
 
-    //Переходы на главную
+    @Step("Клик по кнопке Конструктор для перехода на главную")
     public void clickToConstructorLink() {
         driver.findElement(constructorLink).click();
     }
 
+    @Step("Клик по логотипу для перехода на главную")
     public void clickToLogo() {
         driver.findElement(logo).click();
     }
 
+    @Step("Проверка отображения конструктора Соберите бургер")
     public boolean isConstructorBlockDisplayed() {
         elementVisibilityWait(constructorBlock);
         return driver.findElement(constructorBlock).isDisplayed();
-    }
-
-    //Логаут
-    public void logout() {
-        driver.findElement(logoutButton).click();
     }
 
 }
